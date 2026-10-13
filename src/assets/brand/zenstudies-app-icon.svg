@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Ícone do aplicativo ZenStudies</title>
+  <desc id="desc">Símbolo Ciclo Calmo em um campo verde-escuro arredondado.</desc>
+  <rect width="512" height="512" rx="116" fill="#101C1A"/>
+  <rect x="100" y="100" width="220" height="220" rx="76" fill="none" stroke="#F5F6F0" stroke-width="42"/>
+  <rect x="192" y="192" width="220" height="220" rx="76" fill="none" stroke="#8176F2" stroke-width="42"/>
+  <rect x="188" y="188" width="136" height="136" rx="43" fill="#73D8B2" stroke="#101C1A" stroke-width="22"/>
+</svg>

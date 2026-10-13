@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">ZenStudies desktop — Mesa Modular</title>
+  <desc id="desc">Editor desktop com navegador de notas, página central e painel contextual de conexões.</desc>
+  <defs><filter id="shadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="22" stdDeviation="30" flood-color="#101C1A" flood-opacity=".15"/></filter></defs>
+  <rect width="1600" height="1000" fill="#DDE5E0"/>
+  <rect x="40" y="30" width="1520" height="940" rx="30" fill="#F5F6F0" filter="url(#shadow)"/>
+  <rect x="40" y="30" width="1520" height="54" rx="30" fill="#FFFFFF"/><rect x="40" y="58" width="1520" height="26" fill="#FFFFFF"/>
+  <circle cx="72" cy="57" r="7" fill="#D8DEDA"/><circle cx="96" cy="57" r="7" fill="#D8DEDA"/><circle cx="120" cy="57" r="7" fill="#D8DEDA"/>
+  <text x="800" y="64" text-anchor="middle" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="15" font-weight="600">ZenStudies · Biologia celular</text>
+
+  <rect x="40" y="84" width="210" height="886" fill="#101C1A"/>
+  <g transform="translate(69 112)"><rect width="34" height="34" rx="11" fill="none" stroke="#F5F6F0" stroke-width="7"/><rect x="16" y="16" width="34" height="34" rx="11" fill="none" stroke="#8176F2" stroke-width="7"/><rect x="15" y="15" width="20" height="20" rx="7" fill="#73D8B2" stroke="#101C1A" stroke-width="4"/></g>
+  <g font-family="Inter,Segoe UI,Arial" font-size="16">
+    <text x="70" y="215" fill="#B9C5C1">Hoje</text>
+    <rect x="56" y="236" width="178" height="48" rx="13" fill="#FFFFFF" opacity=".12"/><text x="70" y="267" fill="#FFFFFF" font-weight="700">Notas</text>
+    <text x="70" y="325" fill="#B9C5C1">Revisões</text><text x="70" y="379" fill="#B9C5C1">Biblioteca</text>
+  </g>
+  <rect x="65" y="890" width="160" height="46" rx="13" fill="#172825"/><text x="84" y="919" fill="#DDE5E0" font-family="Inter,Segoe UI,Arial" font-size="14">Configurações</text>
+
+  <rect x="250" y="84" width="310" height="886" fill="#EDF1EE"/>
+  <text x="282" y="137" fill="#101C1A" font-family="Manrope,Segoe UI,Arial" font-size="22" font-weight="720">Notas</text>
+  <rect x="282" y="159" width="246" height="40" rx="12" fill="#FFFFFF" stroke="#D4DDD8"/><text x="302" y="185" fill="#899792" font-family="Inter,Segoe UI,Arial" font-size="14">Buscar notas</text>
+  <text x="282" y="243" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="12" font-weight="750" letter-spacing="1.4">FIXADAS</text>
+  <rect x="270" y="261" width="278" height="72" rx="16" fill="#FFFFFF"/>
+  <rect x="286" y="279" width="36" height="36" rx="10" fill="#E8E5FF"/><circle cx="304" cy="297" r="7" fill="#6558E8"/>
+  <text x="336" y="292" fill="#101C1A" font-family="Inter,Segoe UI,Arial" font-size="14" font-weight="700">Mitocôndrias</text><text x="336" y="314" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="12">Biologia celular</text>
+  <text x="282" y="381" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="12" font-weight="750" letter-spacing="1.4">RECENTES</text>
+  <g font-family="Inter,Segoe UI,Arial">
+    <text x="282" y="428" fill="#101C1A" font-size="14" font-weight="650">Ciclo de Krebs</text><text x="282" y="450" fill="#76847F" font-size="12">Editada há 8 min</text>
+    <line x1="282" y1="476" x2="528" y2="476" stroke="#D4DDD8"/>
+    <text x="282" y="516" fill="#101C1A" font-size="14" font-weight="650">Revolução Industrial</text><text x="282" y="538" fill="#76847F" font-size="12">Editada ontem</text>
+    <line x1="282" y1="564" x2="528" y2="564" stroke="#D4DDD8"/>
+    <text x="282" y="604" fill="#101C1A" font-size="14" font-weight="650">Funções quadráticas</text><text x="282" y="626" fill="#76847F" font-size="12">Editada sexta</text>
+  </g>
+
+  <rect x="560" y="84" width="704" height="886" fill="#FFFFFF"/>
+  <rect x="560" y="84" width="704" height="62" fill="#FBFCFA"/>
+  <text x="592" y="122" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="13">Biologia / Biologia celular</text>
+  <text x="1192" y="122" text-anchor="end" fill="#187A58" font-family="Inter,Segoe UI,Arial" font-size="13" font-weight="650">Salvo agora</text>
+  <circle cx="1220" cy="115" r="5" fill="#73D8B2"/>
+  <g transform="translate(658 196)">
+    <text x="0" y="0" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="13" font-weight="750" letter-spacing="1.5">BIOLOGIA CELULAR</text>
+    <text x="0" y="68" fill="#101C1A" font-family="Manrope,Segoe UI,Arial" font-size="42" font-weight="760" letter-spacing="-1.4">Mitocôndrias e produção</text>
+    <text x="0" y="116" fill="#101C1A" font-family="Manrope,Segoe UI,Arial" font-size="42" font-weight="760" letter-spacing="-1.4">de energia</text>
+    <text x="0" y="170" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="16">Atualizada hoje · 6 minutos de leitura · 8 cartões</text>
+    <line x1="0" y1="205" x2="510" y2="205" stroke="#D4DDD8"/>
+    <text x="0" y="260" fill="#101C1A" font-family="Inter,Segoe UI,Arial" font-size="18" font-weight="700">Respiração celular</text>
+    <text x="0" y="302" fill="#25312E" font-family="Inter,Segoe UI,Arial" font-size="17">A mitocôndria transforma nutrientes em energia utilizável</text>
+    <text x="0" y="333" fill="#25312E" font-family="Inter,Segoe UI,Arial" font-size="17">pela célula. Esse processo produz ATP em etapas conectadas.</text>
+    <rect x="-14" y="372" width="538" height="92" rx="16" fill="#F0EEFF"/>
+    <rect x="-14" y="372" width="4" height="92" rx="2" fill="#6558E8"/>
+    <text x="10" y="406" fill="#6558E8" font-family="Inter,Segoe UI,Arial" font-size="13" font-weight="750">TRECHO SELECIONADO</text>
+    <text x="10" y="438" fill="#101C1A" font-family="Inter,Segoe UI,Arial" font-size="16">A cadeia respiratória ocorre na membrana interna.</text>
+    <rect x="333" y="390" width="171" height="40" rx="12" fill="#6558E8"/><text x="418" y="416" text-anchor="middle" fill="#FFFFFF" font-family="Inter,Segoe UI,Arial" font-size="13" font-weight="700">Criar cartão · Ctrl G</text>
+    <text x="0" y="520" fill="#101C1A" font-family="Inter,Segoe UI,Arial" font-size="18" font-weight="700">Conexão principal</text>
+    <text x="0" y="561" fill="#25312E" font-family="Inter,Segoe UI,Arial" font-size="17">Relacionar com <tspan fill="#6558E8" font-weight="650">metabolismo energético</tspan> e ciclo de Krebs.</text>
+    <line x1="0" y1="604" x2="510" y2="604" stroke="#D4DDD8"/>
+    <text x="0" y="650" fill="#899792" font-family="Inter,Segoe UI,Arial" font-size="16">Digite / para inserir um bloco ou [[ para conectar uma nota…</text>
+  </g>
+
+  <rect x="1264" y="84" width="296" height="886" fill="#F5F6F0"/>
+  <text x="1294" y="137" fill="#101C1A" font-family="Manrope,Segoe UI,Arial" font-size="20" font-weight="720">Contexto</text>
+  <text x="1294" y="184" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="12" font-weight="750" letter-spacing="1.4">CONEXÕES · 3</text>
+  <rect x="1294" y="205" width="236" height="78" rx="16" fill="#FFFFFF" stroke="#D4DDD8"/><text x="1314" y="235" fill="#101C1A" font-family="Inter,Segoe UI,Arial" font-size="14" font-weight="700">Metabolismo energético</text><text x="1314" y="260" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="12">2 menções nesta nota</text>
+  <rect x="1294" y="295" width="236" height="78" rx="16" fill="#FFFFFF" stroke="#D4DDD8"/><text x="1314" y="325" fill="#101C1A" font-family="Inter,Segoe UI,Arial" font-size="14" font-weight="700">Ciclo de Krebs</text><text x="1314" y="350" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="12">Nota relacionada</text>
+  <text x="1294" y="431" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="12" font-weight="750" letter-spacing="1.4">CARTÕES · 8</text>
+  <rect x="1294" y="452" width="236" height="116" rx="18" fill="#101C1A"/>
+  <text x="1314" y="483" fill="#73D8B2" font-family="Inter,Segoe UI,Arial" font-size="12" font-weight="750">PRÓXIMA REVISÃO</text><text x="1314" y="519" fill="#F5F6F0" font-family="Inter,Segoe UI,Arial" font-size="16" font-weight="700">Hoje, 18:00</text><text x="1314" y="544" fill="#B9C5C1" font-family="Inter,Segoe UI,Arial" font-size="12">3 cartões desta nota</text>
+  <rect x="1294" y="586" width="236" height="44" rx="13" fill="#6558E8"/><text x="1412" y="614" text-anchor="middle" fill="#FFFFFF" font-family="Inter,Segoe UI,Arial" font-size="13" font-weight="700">Revisar agora</text>
+  <text x="1294" y="700" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="12" font-weight="750" letter-spacing="1.4">PROPRIEDADES</text>
+  <text x="1294" y="741" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="13">Matéria</text><text x="1518" y="741" text-anchor="end" fill="#101C1A" font-family="Inter,Segoe UI,Arial" font-size="13">Biologia</text>
+  <text x="1294" y="781" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="13">Status</text><text x="1518" y="781" text-anchor="end" fill="#187A58" font-family="Inter,Segoe UI,Arial" font-size="13">Em estudo</text>
+</svg>

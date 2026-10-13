@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" role="img" aria-labelledby="title desc">
+  <title id="title">Logotipo horizontal ZenStudies</title>
+  <desc id="desc">Símbolo Ciclo Calmo ao lado do nome ZenStudies.</desc>
+  <g transform="translate(16 16)">
+    <rect x="14" y="14" width="68" height="68" rx="23" fill="none" stroke="#101C1A" stroke-width="12"/>
+    <rect x="46" y="46" width="68" height="68" rx="23" fill="none" stroke="#6558E8" stroke-width="12"/>
+    <rect x="45" y="45" width="38" height="38" rx="12" fill="#73D8B2" stroke="#F5F6F0" stroke-width="6"/>
+  </g>
+  <text x="170" y="101" fill="#101C1A" font-family="Manrope, Inter, Arial, sans-serif" font-size="62" font-weight="760" letter-spacing="-2.8">Zen</text>
+  <text x="272" y="101" fill="#6558E8" font-family="Manrope, Inter, Arial, sans-serif" font-size="62" font-weight="520" letter-spacing="-2.8">Studies</text>
+</svg>

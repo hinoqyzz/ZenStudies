@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Símbolo ZenStudies — Ciclo Calmo</title>
+  <desc id="desc">Dois ciclos quadrados arredondados e sobrepostos com um núcleo central.</desc>
+  <rect width="128" height="128" fill="none"/>
+  <rect x="14" y="14" width="68" height="68" rx="23" fill="none" stroke="#101C1A" stroke-width="12"/>
+  <rect x="46" y="46" width="68" height="68" rx="23" fill="none" stroke="#6558E8" stroke-width="12"/>
+  <rect x="45" y="45" width="38" height="38" rx="12" fill="#73D8B2" stroke="#F5F6F0" stroke-width="6"/>
+</svg>

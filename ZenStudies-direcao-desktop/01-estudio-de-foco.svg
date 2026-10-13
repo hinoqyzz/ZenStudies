@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">ZenStudies desktop — Estúdio de Foco</title>
+  <desc id="desc">Tela inicial desktop com navegação lateral, foco do dia e fila contextual.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="22" stdDeviation="30" flood-color="#101C1A" flood-opacity=".16"/></filter>
+  </defs>
+  <rect width="1600" height="1000" fill="#DDE5E0"/>
+  <g filter="url(#shadow)">
+    <rect x="40" y="30" width="1520" height="940" rx="30" fill="#F5F6F0"/>
+  </g>
+  <rect x="40" y="30" width="1520" height="54" rx="30" fill="#FFFFFF"/>
+  <rect x="40" y="58" width="1520" height="26" fill="#FFFFFF"/>
+  <circle cx="72" cy="57" r="7" fill="#D8DEDA"/><circle cx="96" cy="57" r="7" fill="#D8DEDA"/><circle cx="120" cy="57" r="7" fill="#D8DEDA"/>
+  <text x="800" y="64" text-anchor="middle" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="15" font-weight="600">ZenStudies</text>
+
+  <rect x="40" y="84" width="248" height="886" fill="#101C1A"/>
+  <g transform="translate(70 114)">
+    <rect x="0" y="0" width="36" height="36" rx="12" fill="none" stroke="#F5F6F0" stroke-width="7"/>
+    <rect x="17" y="17" width="36" height="36" rx="12" fill="none" stroke="#8176F2" stroke-width="7"/>
+    <rect x="16" y="16" width="21" height="21" rx="7" fill="#73D8B2" stroke="#101C1A" stroke-width="4"/>
+    <text x="72" y="35" fill="#F5F6F0" font-family="Manrope,Segoe UI,Arial" font-size="24" font-weight="750">ZenStudies</text>
+  </g>
+  <g font-family="Inter,Segoe UI,Arial" font-size="17">
+    <rect x="62" y="206" width="204" height="50" rx="14" fill="#F5F6F0" opacity=".12"/>
+    <circle cx="88" cy="231" r="7" fill="#73D8B2"/><text x="112" y="237" fill="#FFFFFF" font-weight="650">Hoje</text>
+    <text x="80" y="305" fill="#B9C5C1">Notas</text><text x="80" y="359" fill="#B9C5C1">Revisões</text><text x="80" y="413" fill="#B9C5C1">Biblioteca</text>
+    <line x1="68" y1="450" x2="260" y2="450" stroke="#34433F"/>
+    <text x="80" y="497" fill="#7F918B" font-size="13" font-weight="700" letter-spacing="1.5">MATÉRIAS</text>
+    <circle cx="84" cy="535" r="5" fill="#6558E8"/><text x="102" y="541" fill="#B9C5C1">Biologia</text>
+    <circle cx="84" cy="579" r="5" fill="#73D8B2"/><text x="102" y="585" fill="#B9C5C1">Matemática</text>
+    <circle cx="84" cy="623" r="5" fill="#E0B56D"/><text x="102" y="629" fill="#B9C5C1">História</text>
+  </g>
+  <rect x="66" y="890" width="196" height="48" rx="14" fill="#172825"/>
+  <circle cx="91" cy="914" r="14" fill="#73D8B2"/><text x="116" y="920" fill="#DDE5E0" font-family="Inter,Segoe UI,Arial" font-size="15">Perfil pessoal</text>
+
+  <rect x="288" y="84" width="1272" height="74" fill="#F5F6F0"/>
+  <text x="332" y="130" fill="#101C1A" font-family="Manrope,Segoe UI,Arial" font-size="22" font-weight="700">Hoje</text>
+  <rect x="700" y="102" width="340" height="40" rx="12" fill="#FFFFFF" stroke="#D4DDD8"/>
+  <text x="724" y="128" fill="#899792" font-family="Inter,Segoe UI,Arial" font-size="14">Buscar notas, matérias ou comandos</text>
+  <rect x="967" y="110" width="58" height="24" rx="7" fill="#EEF1EF"/><text x="996" y="127" text-anchor="middle" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="12">Ctrl K</text>
+
+  <text x="332" y="222" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="15" font-weight="700" letter-spacing="1.5">SEGUNDA · 12 DE OUTUBRO</text>
+  <text x="332" y="278" fill="#101C1A" font-family="Manrope,Segoe UI,Arial" font-size="42" font-weight="750" letter-spacing="-1.2">Continue de onde parou</text>
+  <rect x="332" y="314" width="794" height="272" rx="28" fill="#101C1A"/>
+  <text x="368" y="362" fill="#73D8B2" font-family="Inter,Segoe UI,Arial" font-size="14" font-weight="750" letter-spacing="1.6">FOCO ATUAL</text>
+  <text x="368" y="423" fill="#F5F6F0" font-family="Manrope,Segoe UI,Arial" font-size="35" font-weight="720">Biologia celular</text>
+  <text x="368" y="459" fill="#B9C5C1" font-family="Inter,Segoe UI,Arial" font-size="16">Mitocôndrias e produção de energia · 12 min</text>
+  <rect x="368" y="498" width="182" height="50" rx="15" fill="#6558E8"/>
+  <text x="459" y="530" text-anchor="middle" fill="#FFFFFF" font-family="Inter,Segoe UI,Arial" font-size="15" font-weight="700">Continuar sessão</text>
+  <text x="573" y="530" fill="#B9C5C1" font-family="Inter,Segoe UI,Arial" font-size="14">Enter</text>
+  <g transform="translate(890 352)">
+    <rect x="0" y="0" width="118" height="118" rx="38" fill="none" stroke="#F5F6F0" stroke-width="18"/>
+    <rect x="54" y="54" width="118" height="118" rx="38" fill="none" stroke="#6558E8" stroke-width="18"/>
+    <rect x="51" y="51" width="70" height="70" rx="22" fill="#73D8B2" stroke="#101C1A" stroke-width="10"/>
+  </g>
+
+  <text x="332" y="650" fill="#101C1A" font-family="Manrope,Segoe UI,Arial" font-size="25" font-weight="720">Depois do foco</text>
+  <rect x="332" y="680" width="385" height="128" rx="20" fill="#FFFFFF" stroke="#D4DDD8"/>
+  <rect x="354" y="702" width="56" height="56" rx="16" fill="#E8E5FF"/><rect x="372" y="720" width="20" height="20" rx="6" fill="#6558E8"/>
+  <text x="430" y="724" fill="#101C1A" font-family="Inter,Segoe UI,Arial" font-size="16" font-weight="700">História moderna</text>
+  <text x="430" y="752" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="14">5 revisões · aproximadamente 7 min</text>
+  <rect x="430" y="772" width="190" height="6" rx="3" fill="#E4E9E6"/><rect x="430" y="772" width="92" height="6" rx="3" fill="#6558E8"/>
+  <rect x="741" y="680" width="385" height="128" rx="20" fill="#FFFFFF" stroke="#D4DDD8"/>
+  <rect x="763" y="702" width="56" height="56" rx="16" fill="#DDF5EB"/><path d="M778 730h26" stroke="#187A58" stroke-width="5" stroke-linecap="round"/>
+  <text x="839" y="724" fill="#101C1A" font-family="Inter,Segoe UI,Arial" font-size="16" font-weight="700">Nota rápida</text>
+  <text x="839" y="752" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="14">Capture uma ideia sem sair do fluxo</text>
+  <text x="839" y="781" fill="#6558E8" font-family="Inter,Segoe UI,Arial" font-size="13" font-weight="700">Ctrl + Shift + N</text>
+
+  <rect x="1170" y="158" width="390" height="812" fill="#EDF1EE"/>
+  <text x="1210" y="218" fill="#101C1A" font-family="Manrope,Segoe UI,Arial" font-size="24" font-weight="720">Revisões de hoje</text>
+  <text x="1210" y="249" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="14">8 cartões em duas matérias</text>
+  <rect x="1210" y="282" width="310" height="94" rx="18" fill="#FFFFFF"/>
+  <circle cx="1244" cy="329" r="18" fill="#E8E5FF"/><circle cx="1244" cy="329" r="7" fill="#6558E8"/>
+  <text x="1276" y="321" fill="#101C1A" font-family="Inter,Segoe UI,Arial" font-size="15" font-weight="700">Biologia celular</text><text x="1276" y="347" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="13">3 cartões</text>
+  <rect x="1210" y="390" width="310" height="94" rx="18" fill="#FFFFFF"/>
+  <circle cx="1244" cy="437" r="18" fill="#DDF5EB"/><path d="M1235 437h18" stroke="#187A58" stroke-width="4" stroke-linecap="round"/>
+  <text x="1276" y="429" fill="#101C1A" font-family="Inter,Segoe UI,Arial" font-size="15" font-weight="700">História moderna</text><text x="1276" y="455" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="13">5 cartões</text>
+  <rect x="1210" y="510" width="310" height="46" rx="14" fill="#6558E8"/><text x="1365" y="539" text-anchor="middle" fill="#FFFFFF" font-family="Inter,Segoe UI,Arial" font-size="14" font-weight="700">Iniciar revisão</text>
+  <line x1="1210" y1="601" x2="1520" y2="601" stroke="#D4DDD8"/>
+  <text x="1210" y="648" fill="#101C1A" font-family="Manrope,Segoe UI,Arial" font-size="20" font-weight="700">Atalhos</text>
+  <text x="1210" y="690" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="14">Nova nota</text><text x="1510" y="690" text-anchor="end" fill="#101C1A" font-family="Inter,Segoe UI,Arial" font-size="13">Ctrl N</text>
+  <text x="1210" y="730" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="14">Buscar tudo</text><text x="1510" y="730" text-anchor="end" fill="#101C1A" font-family="Inter,Segoe UI,Arial" font-size="13">Ctrl K</text>
+  <text x="1210" y="770" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="14">Abrir revisão</text><text x="1510" y="770" text-anchor="end" fill="#101C1A" font-family="Inter,Segoe UI,Arial" font-size="13">Ctrl R</text>
+</svg>

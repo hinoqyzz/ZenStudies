@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "brand": "ZenStudies",
+    "direction": "Ciclo Calmo",
+    "version": "0.1-concept"
+  },
+  "color": {
+    "background": "#F5F6F0",
+    "surface": "#FFFFFF",
+    "surfaceSubtle": "#E9EEEA",
+    "textPrimary": "#101C1A",
+    "textMuted": "#52625E",
+    "primary": "#6558E8",
+    "primaryHover": "#5146CF",
+    "accent": "#73D8B2",
+    "border": "#D4DDD8",
+    "success": "#187A58",
+    "warning": "#A46210",
+    "error": "#B93A46"
+  },
+  "font": {
+    "display": "Manrope",
+    "heading": "Manrope",
+    "body": "Inter",
+    "utility": "Inter"
+  },
+  "radius": {
+    "sm": 8,
+    "md": 14,
+    "lg": 22,
+    "pill": 999
+  },
+  "space": {
+    "1": 4,
+    "2": 8,
+    "3": 12,
+    "4": 16,
+    "5": 24,
+    "6": 32,
+    "7": 48,
+    "8": 64
+  },
+  "shadow": {
+    "soft": "0 8px 32px rgba(16, 28, 26, 0.08)",
+    "focus": "0 0 0 3px rgba(101, 88, 232, 0.24)"
+  },
+  "motion": {
+    "durationFast": "140ms",
+    "durationBase": "220ms",
+    "durationSlow": "420ms",
+    "ease": "cubic-bezier(0.22, 1, 0.36, 1)"
+  }
+}

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">ZenStudies desktop — Ciclo Imersivo</title>
+  <desc id="desc">Modo de revisão desktop escuro com uma pergunta por vez e atalhos visíveis.</desc>
+  <defs><filter id="shadow" x="-25%" y="-25%" width="150%" height="170%"><feDropShadow dx="0" dy="28" stdDeviation="36" flood-color="#000000" flood-opacity=".28"/></filter></defs>
+  <rect width="1600" height="1000" fill="#07110F"/>
+  <circle cx="1430" cy="130" r="300" fill="#6558E8" opacity=".09"/><circle cx="150" cy="910" r="280" fill="#73D8B2" opacity=".07"/>
+  <rect x="40" y="30" width="1520" height="940" rx="30" fill="#101C1A" filter="url(#shadow)"/>
+  <rect x="40" y="30" width="1520" height="54" rx="30" fill="#142522"/><rect x="40" y="58" width="1520" height="26" fill="#142522"/>
+  <circle cx="72" cy="57" r="7" fill="#34433F"/><circle cx="96" cy="57" r="7" fill="#34433F"/><circle cx="120" cy="57" r="7" fill="#34433F"/>
+  <text x="800" y="64" text-anchor="middle" fill="#B9C5C1" font-family="Inter,Segoe UI,Arial" font-size="15" font-weight="600">Sessão de revisão · Biologia celular</text>
+
+  <g transform="translate(92 116)"><rect width="34" height="34" rx="11" fill="none" stroke="#F5F6F0" stroke-width="7"/><rect x="16" y="16" width="34" height="34" rx="11" fill="none" stroke="#8176F2" stroke-width="7"/><rect x="15" y="15" width="20" height="20" rx="7" fill="#73D8B2" stroke="#101C1A" stroke-width="4"/></g>
+  <text x="164" y="150" fill="#F5F6F0" font-family="Manrope,Segoe UI,Arial" font-size="20" font-weight="720">Ciclo Imersivo</text>
+  <text x="1470" y="146" text-anchor="end" fill="#91A29C" font-family="Inter,Segoe UI,Arial" font-size="14">Esc para sair</text>
+
+  <g transform="translate(168 254)">
+    <text x="0" y="0" fill="#91A29C" font-family="Inter,Segoe UI,Arial" font-size="13" font-weight="750" letter-spacing="1.4">SESSÃO</text>
+    <text x="0" y="56" fill="#F5F6F0" font-family="Manrope,Segoe UI,Arial" font-size="30" font-weight="720">Biologia celular</text>
+    <text x="0" y="94" fill="#91A29C" font-family="Inter,Segoe UI,Arial" font-size="14">3 de 8 cartões</text>
+    <rect x="0" y="126" width="230" height="8" rx="4" fill="#293936"/><rect x="0" y="126" width="86" height="8" rx="4" fill="#6558E8"/>
+    <text x="0" y="196" fill="#91A29C" font-family="Inter,Segoe UI,Arial" font-size="13" font-weight="750" letter-spacing="1.4">RITMO</text>
+    <text x="0" y="238" fill="#D7E0DD" font-family="Inter,Segoe UI,Arial" font-size="15">Sem cronômetro</text>
+    <text x="0" y="273" fill="#D7E0DD" font-family="Inter,Segoe UI,Arial" font-size="15">Sem sequência punitiva</text>
+    <text x="0" y="308" fill="#D7E0DD" font-family="Inter,Segoe UI,Arial" font-size="15">Pausar quando quiser</text>
+  </g>
+
+  <rect x="486" y="198" width="850" height="594" rx="32" fill="#F5F6F0" filter="url(#shadow)"/>
+  <text x="550" y="257" fill="#6558E8" font-family="Inter,Segoe UI,Arial" font-size="13" font-weight="750" letter-spacing="1.5">PERGUNTA 3</text>
+  <rect x="1180" y="232" width="92" height="36" rx="12" fill="#E9EEEA"/><text x="1226" y="255" text-anchor="middle" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="12">Biologia</text>
+  <text x="550" y="352" fill="#101C1A" font-family="Manrope,Segoe UI,Arial" font-size="39" font-weight="740" letter-spacing="-1">Qual é a principal função da</text>
+  <text x="550" y="400" fill="#101C1A" font-family="Manrope,Segoe UI,Arial" font-size="39" font-weight="740" letter-spacing="-1">membrana interna da mitocôndria?</text>
+  <text x="550" y="454" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="16">Pense na cadeia respiratória e na produção de ATP.</text>
+  <rect x="550" y="515" width="722" height="1" fill="#D4DDD8"/>
+  <rect x="550" y="566" width="250" height="54" rx="16" fill="#6558E8"/>
+  <text x="675" y="600" text-anchor="middle" fill="#FFFFFF" font-family="Inter,Segoe UI,Arial" font-size="15" font-weight="700">Mostrar resposta</text>
+  <rect x="815" y="574" width="74" height="38" rx="11" fill="#E9EEEA"/><text x="852" y="598" text-anchor="middle" fill="#52625E" font-family="Inter,Segoe UI,Arial" font-size="12">Espaço</text>
+  <text x="550" y="682" fill="#899792" font-family="Inter,Segoe UI,Arial" font-size="14">Você poderá avaliar a lembrança depois de revelar a resposta.</text>
+
+  <g transform="translate(1055 834)">
+    <rect x="0" y="0" width="132" height="48" rx="14" fill="#172825" stroke="#34433F"/><text x="66" y="30" text-anchor="middle" fill="#B9C5C1" font-family="Inter,Segoe UI,Arial" font-size="13">Ainda não · 1</text>
+    <rect x="146" y="0" width="132" height="48" rx="14" fill="#172825" stroke="#34433F"/><text x="212" y="30" text-anchor="middle" fill="#B9C5C1" font-family="Inter,Segoe UI,Arial" font-size="13">Quase · 2</text>
+    <rect x="292" y="0" width="132" height="48" rx="14" fill="#172825" stroke="#34433F"/><text x="358" y="30" text-anchor="middle" fill="#B9C5C1" font-family="Inter,Segoe UI,Arial" font-size="13">Lembrei · 3</text>
+  </g>
+  <text x="486" y="925" fill="#6E827B" font-family="Inter,Segoe UI,Arial" font-size="13">As opções ficam ativas após revelar a resposta.</text>
+</svg>
