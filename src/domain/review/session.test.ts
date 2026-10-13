@@ -24,7 +24,8 @@ describe("sessão de revisão", () => {
   it("retoma a sessão gravada sem repetir respostas", async () => {
     const stack = await openStack();
     const note = await stack.services.notes.create({ title: "Revisão", text: "conteúdo" });
-    await stack.services.cards.create({ noteId: note.id, question: "Pergunta", answer: "Resposta" });
+    const card = await stack.services.cards.create({ noteId: note.id, question: "Pergunta", answer: "Resposta" });
+    await stack.repository.putCard({ ...card, nextReviewAt: now.toISOString() });
     const started = await stack.services.review.startOrResume(now);
     if (!started) throw new Error("sessão ausente");
     expect(started.responses).toEqual([]);

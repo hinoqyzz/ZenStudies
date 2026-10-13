@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApp } from "../../app/context";
-import type { Card, FocusSession, Note, Subject } from "../../domain/models";
+import type { Card, Note, Subject } from "../../domain/models";
 import { readingMinutes } from "../../domain/content";
 import { useUiStore } from "../../stores/ui-store";
+import { FocusPanel } from "../focus/FocusPanel";
 import { EmptyState } from "../../ui/components";
 import { useWindowWidth } from "../../ui/use-window-width";
-import { MintCore } from "../../ui/Symbol";
 
 export function TodayPage() {
   const { services, desktop } = useApp();
@@ -16,7 +16,6 @@ export function TodayPage() {
   const [notes, setNotes] = useState<Note[]>([]);
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [due, setDue] = useState<Card[]>([]);
-  const [focus, setFocus] = useState<FocusSession | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [capture, setCapture] = useState("");
   const [capturedId, setCapturedId] = useState<string | null>(null);
@@ -24,13 +23,12 @@ export function TodayPage() {
 
   useEffect(() => {
     let cancelled = false;
-    void Promise.all([services.notes.list(), services.subjects.list(), services.cards.due(), services.focus.active()])
-      .then(([nextNotes, nextSubjects, nextDue, nextFocus]) => {
+    void Promise.all([services.notes.list(), services.subjects.list(), services.cards.due()])
+      .then(([nextNotes, nextSubjects, nextDue]) => {
         if (cancelled) return;
         setNotes(nextNotes);
         setSubjects(nextSubjects);
         setDue(nextDue);
-        setFocus(nextFocus);
       })
       .catch((reason: unknown) => {
         if (!cancelled) setError(services.describeError(reason));
@@ -50,11 +48,12 @@ export function TodayPage() {
           action="Criar primeira nota"
           onAction={() => void services.notes.create().then((note) => navigate(`/notas/${note.id}`))}
         />
+        <FocusPanel note={null} />
       </div>
     );
   }
 
-  const current = notes.find((note) => note.id === focus?.noteId) ?? notes[0];
+  const current = notes[0];
   const subject = subjects.find((item) => item.id === current?.subjectId);
   const groups = groupCards(due);
   const date = new Intl.DateTimeFormat("pt-BR", { weekday: "long", day: "numeric", month: "long" }).format(new Date());
@@ -64,20 +63,7 @@ export function TodayPage() {
       <div className="today-main">
         <p className="kicker">{date}</p>
         <h2 className="display">Continue de onde parou</h2>
-        {current ? (
-          <article className="focus-card">
-            <div>
-              <p className="kicker">Foco atual</p>
-              <h2>{current.title}</h2>
-              <p>{subject?.name ?? "Sem matéria"} · {readingMinutes(current.text)} min</p>
-              <div className="focus-actions">
-                <button type="button" className="button" onClick={() => navigate(`/notas/${current.id}`)}>Continuar sessão</button>
-                <button type="button" className="button ghost" style={{ color: "#b9c5c1" }} onClick={() => void services.focus.start({ noteId: current.id }).then(() => navigate(`/notas/${current.id}`))}>Iniciar foco</button>
-              </div>
-            </div>
-            <MintCore size={28} />
-          </article>
-        ) : null}
+        <FocusPanel note={current ? { id: current.id, title: current.title, detail: `${subject?.name ?? "Sem matéria"} · ${readingMinutes(current.text)} min` } : null} />
         <h3 className="display" style={{ fontSize: 25, marginTop: 36 }}>Depois do foco</h3>
         <div className="card-grid">
           <article className="surface-card">

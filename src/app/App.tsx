@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { HashRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { flushAllSaves } from "../application/autosave";
+import { focusRemainingMs } from "../domain/focus/clock";
 import type { AppContextValue } from "./context";
 import { AppProvider, useApp } from "./context";
 import { bindServices } from "./registry";
@@ -144,15 +145,9 @@ function Runtime() {
 
 async function tick(services: AppContextValue["services"], desktop: AppContextValue["desktop"]) {
   const preferences = loadPreferences();
-  const focus = await services.focus.active();
-  if (focus) {
-    const end = new Date(focus.startedAt).getTime() + focus.plannedMinutes * 60_000;
-    if (Date.now() >= end) {
-      await services.focus.complete(focus.id);
-      if (preferences.notificationsEnabled && preferences.notifyFocusEnd) {
-        await desktop.notify("Foco concluído", `${focus.title} chegou ao tempo previsto.`);
-      }
-    }
+  const focus = await services.focus.current();
+  if (focus?.status === "active" && focusRemainingMs(focus, new Date()) <= 0) {
+    await services.focus.finish(focus.id, { notify: preferences.notificationsEnabled && preferences.notifyFocusEnd });
   }
   if (!preferences.notificationsEnabled || !preferences.reviewEnabled || !preferences.notifyReviews) return;
   const now = new Date();

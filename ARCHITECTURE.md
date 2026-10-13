@@ -47,6 +47,18 @@ Cada resposta grava um evento imutável com o estado anterior, a resposta, o est
 
 Trocar o algoritmo significa substituir `applyReview` e `isDueOnLocalDay`. O restante da aplicação fala com o serviço de revisão, não com a fórmula.
 
+Editar a pergunta ou a resposta de um cartão só altera o texto e a revisão do registro. Intervalo, dificuldade, acertos, erros e eventos antigos permanecem. Suspender ou arquivar tira o cartão da fila. Reativar devolve o mesmo agendamento. Excluir um cartão apaga o registro e o retira de uma sessão aberta; os eventos de revisão ficam.
+
+## Foco
+
+O tempo restante vem de `startedAt`, `pausedMs` e `plannedMinutes`, não da quantidade de vezes que o relógio da interface executou. Pausar grava `pausedAt`. Continuar soma esse intervalo em `pausedMs`. Uma sessão antiga sem esses campos é lida como pausa zero.
+
+Só existe uma sessão aberta, em andamento ou pausada. Iniciar de novo devolve a que já existe. O término natural grava `completed` uma única vez e, se as notificações estiverem permitidas, avisa pelo Windows enquanto o processo está aberto. Encerrar manualmente conclui sem esse aviso. Reiniciar zera o relógio da sessão atual.
+
+## Matérias
+
+Renomear atualiza o nome gravado nos cartões. Recolorir usa a paleta do produto. Excluir marca a matéria como apagada e tira o vínculo das notas, dos cartões e dos PDFs. Esses registros, os anexos e o histórico de revisão continuam no banco.
+
 ## Arquivos
 
 A importação valida extensão, tamanho, nome e bytes mágicos. O Rust grava o binário em `storage/{attachments|pdfs}/{uuid}.{ext}` e o Dexie guarda metadados, hash e caminho relativo. Caminhos com `..`, barra invertida ou unidade são recusados. `open_managed` só abre um arquivo dentro dessa pasta.

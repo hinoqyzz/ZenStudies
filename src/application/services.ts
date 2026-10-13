@@ -21,7 +21,9 @@ import {
 import { annotationIsValid, normalizePoints, normalizeRect, restoreAnnotation, serializeAnnotation } from "../domain/annotations";
 import { buildManifest, validateBackup } from "../domain/backup";
 import { cleanMultiline, cleanPlain, cleanTitle, fileBaseName } from "../domain/sanitize";
+import { clampFocusMinutes, focusRemainingMs, isFreshCompletion, normalizeFocus } from "../domain/focus/clock";
 import { isDueOnLocalDay, newCardSchedule } from "../domain/review/scheduler";
+import { isPaletteColor } from "../domain/subjects";
 import { answerCard, currentCardId } from "../domain/review/session";
 import { loadPreferences, preferencesForBackup, sanitizePreferences, savePreferences } from "../domain/preferences";
 import type { DesktopGateway, StoredFile } from "../desktop/gateway";
@@ -56,6 +58,8 @@ export interface StudyServices {
     list(): Promise<Subject[]>;
     create(name: string, color?: string): Promise<Subject>;
     rename(id: string, name: string): Promise<void>;
+    recolor(id: string, color: string): Promise<void>;
+    remove(id: string): Promise<void>;
   };
   notes: {
     list(): Promise<Note[]>;
@@ -79,6 +83,8 @@ export interface StudyServices {
     due(now?: Date): Promise<Card[]>;
     create(input: { noteId: string; question: string; answer: string; sourcePdfId?: string | null; sourcePage?: number | null; sourceAnnotationId?: string | null }): Promise<Card>;
     setState(id: string, state: Card["state"]): Promise<void>;
+    update(id: string, input: { question: string; answer: string }): Promise<Card>;
+    remove(id: string): Promise<void>;
   };
   review: {
     active(): Promise<import("../domain/models").ReviewSession | null>;
@@ -87,8 +93,14 @@ export interface StudyServices {
     events(): Promise<import("../domain/models").ReviewEvent[]>;
   };
   focus: {
-    active(): Promise<FocusSession | null>;
+    current(): Promise<FocusSession | null>;
+    snapshot(now?: Date): Promise<{ open: FocusSession | null; finished: FocusSession | null }>;
     start(input?: { noteId?: string | null; minutes?: number }): Promise<FocusSession>;
+    pause(id: string): Promise<FocusSession>;
+    resume(id: string): Promise<FocusSession>;
+    setPlan(id: string, minutes: number): Promise<FocusSession>;
+    restart(id: string): Promise<FocusSession>;
+    finish(id: string, options?: { notify?: boolean }): Promise<{ changed: boolean; session: FocusSession }>;
     complete(id: string): Promise<void>;
     cancel(id: string): Promise<void>;
   };
@@ -148,11 +160,44 @@ export function createStudyServices(
 ): StudyServices {
   let answerTail: Promise<unknown> = Promise.resolve();
   let sessionTail: Promise<unknown> = Promise.resolve();
+  let focusTail: Promise<unknown> = Promise.resolve();
   const repo = repository;
 
   const publish = (type: "notes" | "cards" | "pdfs" | "library" | "trash" | "session" | "preferences", id?: string) => {
     sync.publish({ type, id });
   };
+
+  function enqueueFocus<T>(work: () => Promise<T>): Promise<T> {
+    const run = focusTail.then(work, work);
+    focusTail = run.then(() => undefined, () => undefined);
+    return run;
+  }
+
+  async function readFocusSnapshot(now = new Date()) {
+    const sessions = (await repo.listFocus()).map((session) => normalizeFocus(session));
+    const open = sessions
+      .filter((session) => session.status === "active" || session.status === "paused")
+      .sort((left, right) => right.startedAt.localeCompare(left.startedAt))[0] ?? null;
+    const finished = sessions
+      .filter((session) => session.status === "completed" && session.endedAt)
+      .sort((left, right) => (right.endedAt ?? "").localeCompare(left.endedAt ?? ""))[0] ?? null;
+    return { open, finished: finished && isFreshCompletion(finished, now) ? finished : null };
+  }
+
+  async function finishFocus(session: FocusSession, notify: boolean): Promise<{ changed: boolean; session: FocusSession }> {
+    const current = normalizeFocus(session);
+    if (current.status === "completed" || current.status === "cancelled") return { changed: false, session: current };
+    const next: FocusSession = { ...current, status: "completed", endedAt: nowIso(), pausedAt: null, revision: current.revision + 1 };
+    await repo.putFocus(next);
+    publish("session", next.id);
+    if (notify) {
+      const preferences = loadPreferences();
+      if (preferences.notificationsEnabled && preferences.notifyFocusEnd) {
+        await desktop.notify("Foco concluído", `${next.title} chegou ao tempo previsto.`);
+      }
+    }
+    return { changed: true, session: next };
+  }
 
   async function ensureMeta(): Promise<AppMeta> {
     const existing = await repo.getMeta();
@@ -218,6 +263,36 @@ export function createStudyServices(
           }
         });
         publish("library", id);
+      },
+      async recolor(id: string, color: string) {
+        const subject = await repo.getSubject(id);
+        if (!subject || subject.deletedAt) throw new Error("Matéria não encontrada.");
+        if (!isPaletteColor(color)) throw new Error("Escolha uma cor da paleta.");
+        await repo.putSubject({ ...subject, color, updatedAt: nowIso(), revision: subject.revision + 1 });
+        publish("library", id);
+      },
+      async remove(id: string) {
+        const subject = await repo.getSubject(id);
+        if (!subject || subject.deletedAt) throw new Error("Matéria não encontrada.");
+        const now = nowIso();
+        await repo.transaction(async () => {
+          await repo.putSubject({ ...subject, deletedAt: now, updatedAt: now, revision: subject.revision + 1 });
+          for (const note of await repo.listNotes(true)) {
+            if (note.subjectId === id) await repo.putNote({ ...note, subjectId: null, updatedAt: now, revision: note.revision + 1 });
+          }
+          for (const card of await repo.listCards(true)) {
+            if (card.subjectId === id) {
+              await repo.putCard({ ...card, subjectId: null, subjectName: "Sem matéria", updatedAt: now, revision: card.revision + 1 });
+            }
+          }
+          for (const pdf of await repo.listPdfs(true)) {
+            if (pdf.subjectId === id) await repo.putPdf({ ...pdf, subjectId: null, updatedAt: now, revision: pdf.revision + 1 });
+          }
+        });
+        publish("library", id);
+        publish("notes");
+        publish("cards");
+        publish("pdfs");
       },
     },
     notes: {
@@ -401,6 +476,41 @@ export function createStudyServices(
         await repo.putCard({ ...card, state, updatedAt: nowIso(), revision: card.revision + 1 });
         publish("cards", id);
       },
+      async update(id, input) {
+        const card = await repo.getCard(id);
+        if (!card || card.deletedAt) throw new Error("Cartão não encontrado.");
+        const question = cleanPlain(input.question, 1000);
+        const answer = cleanMultiline(input.answer);
+        if (!question || !answer) throw new Error("O cartão precisa de pergunta e resposta.");
+        const next: Card = { ...card, question, answer, updatedAt: nowIso(), revision: card.revision + 1 };
+        await repo.putCard(next);
+        publish("cards", id);
+        return next;
+      },
+      async remove(id) {
+        const card = await repo.getCard(id);
+        if (!card) throw new Error("Cartão não encontrado.");
+        const now = nowIso();
+        await repo.transaction(async () => {
+          await repo.deleteCard(id);
+          for (const session of await repo.listSessions()) {
+            if (!session.cardIds.includes(id)) continue;
+            const index = session.cardIds.indexOf(id);
+            const cardIds = session.cardIds.filter((cardId) => cardId !== id);
+            const position = index < session.position ? session.position - 1 : session.position;
+            const done = session.status === "active" && (cardIds.length === 0 || position >= cardIds.length);
+            await repo.putSession({
+              ...session,
+              cardIds,
+              position: Math.min(position, cardIds.length),
+              status: done ? "completed" : session.status,
+              completedAt: done ? now : session.completedAt,
+              updatedAt: now,
+            });
+          }
+        });
+        publish("cards", id);
+      },
     },
     review: {
       async active() {
@@ -472,39 +582,126 @@ export function createStudyServices(
       },
     },
     focus: {
-      async active() {
-        const sessions = await repo.listFocus();
-        return sessions.find((session) => session.status === "active") ?? null;
+      async current() {
+        return (await readFocusSnapshot()).open;
       },
-      async start(input = {}) {
-        const existing = (await repo.listFocus()).find((session) => session.status === "active");
-        if (existing) return existing;
-        const note = input.noteId ? await repo.getNote(input.noteId) : null;
-        const now = nowIso();
-        const session: FocusSession = {
-          id: createId(),
-          noteId: note?.id ?? null,
-          subjectId: note?.subjectId ?? null,
-          title: note?.title ?? "Sessão de foco",
-          plannedMinutes: input.minutes ?? loadPreferences().focusMinutes,
-          startedAt: now,
-          endedAt: null,
-          status: "active",
-          revision: 1,
-        };
-        await repo.putFocus(session);
-        publish("session", session.id);
-        return session;
+      snapshot(now = new Date()) {
+        return readFocusSnapshot(now);
       },
-      async complete(id) {
-        const session = await getFocus(repo, id);
-        await repo.putFocus({ ...session, status: "completed", endedAt: nowIso(), revision: session.revision + 1 });
-        publish("session", id);
+      start(input = {}) {
+        return enqueueFocus(async () => {
+          const open = (await readFocusSnapshot()).open;
+          if (open) return open;
+          const note = input.noteId ? await repo.getNote(input.noteId) : null;
+          const now = nowIso();
+          const session: FocusSession = {
+            id: createId(),
+            noteId: note?.id ?? null,
+            subjectId: note?.subjectId ?? null,
+            title: note?.title ?? "Sessão de foco",
+            plannedMinutes: clampFocusMinutes(input.minutes ?? loadPreferences().focusMinutes),
+            startedAt: now,
+            endedAt: null,
+            pausedAt: null,
+            pausedMs: 0,
+            status: "active",
+            revision: 1,
+          };
+          await repo.putFocus(session);
+          publish("session", session.id);
+          return session;
+        });
       },
-      async cancel(id) {
-        const session = await getFocus(repo, id);
-        await repo.putFocus({ ...session, status: "cancelled", endedAt: nowIso(), revision: session.revision + 1 });
-        publish("session", id);
+      pause(id) {
+        return enqueueFocus(async () => {
+          const session = await getFocus(repo, id);
+          if (session.status === "paused") return session;
+          if (session.status !== "active") throw new Error("Só uma sessão em andamento pode ser pausada.");
+          const next: FocusSession = { ...session, status: "paused", pausedAt: nowIso(), revision: session.revision + 1 };
+          await repo.putFocus(next);
+          publish("session", id);
+          return next;
+        });
+      },
+      resume(id) {
+        return enqueueFocus(async () => {
+          const session = await getFocus(repo, id);
+          if (session.status === "active") return session;
+          if (session.status !== "paused" || !session.pausedAt) throw new Error("A sessão não está pausada.");
+          const now = new Date();
+          const pausedMs = session.pausedMs + Math.max(0, now.getTime() - new Date(session.pausedAt).getTime());
+          const next: FocusSession = { ...session, status: "active", pausedAt: null, pausedMs, revision: session.revision + 1 };
+          if (focusRemainingMs(next, now) <= 0) return (await finishFocus(next, true)).session;
+          await repo.putFocus(next);
+          publish("session", id);
+          return next;
+        });
+      },
+      setPlan(id, minutes) {
+        return enqueueFocus(async () => {
+          const session = await getFocus(repo, id);
+          if (session.status !== "active" && session.status !== "paused") throw new Error("A sessão já foi encerrada.");
+          const next: FocusSession = { ...session, plannedMinutes: clampFocusMinutes(minutes), revision: session.revision + 1 };
+          await repo.putFocus(next);
+          publish("session", id);
+          return next;
+        });
+      },
+      restart(id) {
+        return enqueueFocus(async () => {
+          const session = await getFocus(repo, id);
+          if (session.status === "completed" || session.status === "cancelled") {
+            const open = (await readFocusSnapshot()).open;
+            if (open) return open;
+            const note = session.noteId ? await repo.getNote(session.noteId) : null;
+            const now = nowIso();
+            const created: FocusSession = {
+              id: createId(),
+              noteId: note?.id ?? session.noteId,
+              subjectId: note?.subjectId ?? session.subjectId,
+              title: note?.title ?? session.title,
+              plannedMinutes: session.plannedMinutes,
+              startedAt: now,
+              endedAt: null,
+              pausedAt: null,
+              pausedMs: 0,
+              status: "active",
+              revision: 1,
+            };
+            await repo.putFocus(created);
+            publish("session", created.id);
+            return created;
+          }
+          const now = nowIso();
+          const next: FocusSession = {
+            ...session,
+            startedAt: now,
+            endedAt: null,
+            pausedAt: null,
+            pausedMs: 0,
+            status: "active",
+            revision: session.revision + 1,
+          };
+          await repo.putFocus(next);
+          publish("session", id);
+          return next;
+        });
+      },
+      finish(id, options) {
+        return enqueueFocus(() => getFocus(repo, id).then((session) => finishFocus(session, options?.notify === true)));
+      },
+      complete(id) {
+        return enqueueFocus(async () => {
+          await finishFocus(await getFocus(repo, id), false);
+        });
+      },
+      cancel(id) {
+        return enqueueFocus(async () => {
+          const session = await getFocus(repo, id);
+          if (session.status === "cancelled" || session.status === "completed") return;
+          await repo.putFocus({ ...session, status: "cancelled", endedAt: nowIso(), pausedAt: null, revision: session.revision + 1 });
+          publish("session", id);
+        });
       },
     },
     attachments: {
@@ -838,7 +1035,7 @@ async function mustPdf(repo: StudyRepository, id: string): Promise<PdfDocument> 
 async function getFocus(repo: StudyRepository, id: string): Promise<FocusSession> {
   const session = (await repo.listFocus()).find((item) => item.id === id);
   if (!session) throw new Error("Sessão de foco não encontrada.");
-  return session;
+  return normalizeFocus(session);
 }
 
 function storedMeta(stored: StoredFile) {

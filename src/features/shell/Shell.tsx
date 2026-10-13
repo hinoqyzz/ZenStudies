@@ -10,6 +10,7 @@ import { useUiStore } from "../../stores/ui-store";
 import { SymbolMark } from "../../ui/Symbol";
 import { IconTip } from "../../ui/components";
 import { importPdf } from "../pdf/import-pdf";
+import { FocusStrip } from "../focus/FocusPanel";
 import { CommandPalette } from "./CommandPalette";
 
 gsap.registerPlugin(useGSAP);
@@ -169,6 +170,7 @@ export function Shell() {
             <span className="kbd">Ctrl K</span>
           </button>
         </header>
+        {location.pathname === "/" ? null : <FocusStrip />}
         <div className="page">
           <Outlet />
         </div>

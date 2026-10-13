@@ -139,7 +139,7 @@ export interface ReviewSession {
   status: ReviewSessionStatus;
 }
 
-export type FocusStatus = "active" | "completed" | "cancelled";
+export type FocusStatus = "active" | "paused" | "completed" | "cancelled";
 
 export interface FocusSession {
   id: string;
@@ -149,6 +149,8 @@ export interface FocusSession {
   plannedMinutes: number;
   startedAt: IsoDateTime;
   endedAt: IsoDateTime | null;
+  pausedAt: IsoDateTime | null;
+  pausedMs: number;
   status: FocusStatus;
   revision: number;
 }

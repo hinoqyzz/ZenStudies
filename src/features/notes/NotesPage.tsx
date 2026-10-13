@@ -7,6 +7,7 @@ import { useApp } from "../../app/context";
 import type { Attachment, Card, Note, Subject } from "../../domain/models";
 import { loadPreferences, savePreferences } from "../../domain/preferences";
 import { useUiStore } from "../../stores/ui-store";
+import { NoteCards } from "./NoteCards";
 import { EmptyState, IconTip } from "../../ui/components";
 import { useWindowWidth } from "../../ui/use-window-width";
 import { NoteEditor } from "./NoteEditor";
@@ -110,11 +111,8 @@ export function NotesPage({ detached = false }: { detached?: boolean }) {
             ))}
           </div>
           <p className="kicker">Cartões · {cards.length}</p>
-          <div className="inspector-card" style={{ padding: 16, background: "var(--ink)", color: "var(--paper)" }}>
-            <div className="kicker" style={{ color: "var(--mint)" }}>Próxima revisão</div>
-            <strong>{cards[0] ? new Date(cards[0].nextReviewAt).toLocaleString("pt-BR") : "Sem cartões"}</strong>
-            <button type="button" className="button" style={{ width: "100%", marginTop: 12 }} onClick={() => navigate("/revisoes/sessao")}>Revisar agora</button>
-          </div>
+          <NoteCards cards={cards} onChanged={() => void reload()} />
+          {cards.some((card) => card.state === "active") ? <button type="button" className="button" onClick={() => navigate("/revisoes/sessao")}>Revisar agora</button> : null}
           <p className="kicker">Anexos · {attachments.length}</p>
           {attachments.map((attachment) => <div key={attachment.id} className="meta">{attachment.originalName}</div>)}
           <p className="kicker">Propriedades</p>
